@@ -1,0 +1,8 @@
+build
+node_modules
+functions/node_modules
+functions/config.js
+functions/firebase-key.json
+firebase.json
+.firebaserc
+.firebase
