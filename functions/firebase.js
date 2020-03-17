@@ -31,14 +31,8 @@ exports.getId = async (email) => {
 };
 
 exports.getUser = async (id) => {
-    let output = {};
-    await users.get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-            if (doc.id === id)
-                output = doc.data();
-        });
-    });
-    return output;
+    const doc = await users.doc(id).get();
+    return doc.data();
 };
 
 //Write Data
