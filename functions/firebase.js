@@ -11,11 +11,9 @@ exports.read = async (email) => {
     await users.get().then((snapshot) => {
         snapshot.forEach((doc) => {
             const data = doc.data();
-            if (data.email == email)
+            if (data.email === email)
                 output = data;
         });
-    }).catch((err) => {
-        console.log('Error getting documents', err);
     });
     return output;
 };
@@ -25,11 +23,9 @@ exports.getId = async (email) => {
     await users.get().then((snapshot) => {
         snapshot.forEach((doc) => {
             const data = doc.data();
-            if (data.email == email)
+            if (data.email === email)
                 output = doc.id;
         });
-    }).catch((err) => {
-        console.log('Error getting documents', err);
     });
     return output;
 };
@@ -41,8 +37,6 @@ exports.getUser = async (id) => {
             if (doc.id === id)
                 output = doc.data();
         });
-    }).catch((err) => {
-        console.log('Error getting documents', err);
     });
     return output;
 };

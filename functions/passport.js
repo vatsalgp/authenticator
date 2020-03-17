@@ -39,9 +39,7 @@ const JwtOptions = {
 //Create Strategy
 const JwtLogin = new JwtStrategy(JwtOptions, async (payload, done) => {
     const id = payload.sub;
-    // console.log("id: ", id);
     const user = await firebase.getUser(id);
-    // console.log("user: ", user);
     if (user && user.email)
         return done(null, user);
     else

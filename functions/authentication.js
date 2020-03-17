@@ -8,7 +8,6 @@ function tokenForUser(id) {
 }
 
 exports.signin = function (req, res) {
-    console.log(req.user);
     res.send({ token: tokenForUser(req.user) });
 }
 
@@ -30,7 +29,6 @@ exports.signup = async (req, res) => {
 
     //If email does not exist, create and save user record
     await auth.writeCred({ email, password }, id => {
-        console.log("ID: ", id)
         //Respond with token
         if (id)
             res.json({ token: tokenForUser(id) });

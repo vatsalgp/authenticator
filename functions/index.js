@@ -38,5 +38,4 @@ router(app);
 const port = process.env.PORT || 4000;
 const server = http.createServer(app);
 server.listen(port);
-console.log("Server listening on:", port);
 exports.app = functions.https.onRequest(app);
