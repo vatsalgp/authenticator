@@ -17,7 +17,7 @@ const whitelist = [
 ]; // No ending Slash
 
 const corsOptions = {
-    origin: function (origin, callback) {
+    origin: (origin, callback) => {
         if (whitelist.indexOf(origin) !== -1) {
             callback(null, true)
         } else {

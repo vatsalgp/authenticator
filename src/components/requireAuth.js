@@ -20,7 +20,7 @@ export default ChildComponent => {
             return <ChildComponent {...this.props} />;
         }
     }
-    function mapStateToProps(state) {
+    const mapStateToProps = state => {
         return { auth: state.auth.authenticated };
     }
     return connect(mapStateToProps)(ComposedComponent);

@@ -2,12 +2,12 @@ const jwt = require("jwt-simple");
 const config = require("./config");
 const auth = require("./auth-firebase");
 
-function tokenForUser(id) {
+const tokenForUser = id => {
     const timeStamp = new Date().getTime();
     return jwt.encode({ sub: id, iat: timeStamp }, config.secret);
 }
 
-exports.signin = function (req, res) {
+exports.signin = (req, res) => {
     res.send({ token: tokenForUser(req.user) });
 }
 

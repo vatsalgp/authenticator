@@ -14,7 +14,7 @@ const ExtractJwt = passportJwt.ExtractJwt;
 const LocalLogin = new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
     const hashedPassword = await auth.readCred(email);
     if (hashedPassword) {
-        bcrypt.compare(password, hashedPassword, async function (err, isMatch) {
+        bcrypt.compare(password, hashedPassword, async (err, isMatch) => {
             if (err)
                 return done(err);
             else if (!isMatch)
