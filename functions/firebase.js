@@ -30,9 +30,9 @@ exports.getId = async (email) => {
     return output;
 };
 
-exports.getUser = async (id) => {
+exports.getById = async id => {
     const doc = await users.doc(id).get();
-    return doc.data();
+    return { id, ...doc.data() };
 };
 
 //Write Data
