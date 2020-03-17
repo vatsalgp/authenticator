@@ -5,3 +5,4 @@ functions/config.js
 firebase.json
 .firebaserc
 .firebase
+*log*
