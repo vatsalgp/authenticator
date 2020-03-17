@@ -28,11 +28,10 @@ exports.signup = async (req, res) => {
     }
 
     //If email does not exist, create and save user record
-    await auth.writeCred({ email, password }, id => {
-        //Respond with token
-        if (id)
-            res.json({ token: tokenForUser(id) });
-        else
-            res.json({ error: "Unable to add user" });
-    });
+    const id = await auth.writeCred({ email, password })
+    //Respond with token
+    if (id)
+        res.json({ token: tokenForUser(id) });
+    else
+        res.json({ error: "Unable to add user" });
 }

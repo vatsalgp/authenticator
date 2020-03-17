@@ -11,8 +11,8 @@ exports.readCred = async email => {
         return "";
 };
 
-exports.writeCred = async ({ email, password }, callback) => {
+exports.writeCred = async ({ email, password }) => {
     const hash = await bcrypt.hash(password, 10);
     const id = await firebase.write({ email, password: hash });
-    callback(id);
+    return id;
 }
