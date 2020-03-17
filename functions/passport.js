@@ -10,8 +10,8 @@ const LocalStrategy = passportLocal.Strategy;
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
 
-//Create Local Strategy
-const LocalLogin = new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
+//Create Local Strategy for Signin
+const LocalSignIn = new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
     const hashedPassword = await auth.readCred(email);
     if (hashedPassword) {
         bcrypt.compare(password, hashedPassword, async (err, isMatch) => {
@@ -31,6 +31,20 @@ const LocalLogin = new LocalStrategy({ usernameField: "email" }, async (email, p
     }
 });
 
+//Create Local Strategy for Signup
+const LocalSignUp = new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
+    if (!(email && password))
+        return done("You must provide email and password");
+
+    // If a user with given email exists return error
+    if (await auth.readCred(email))
+        return done("Email is in use");
+
+    //If email does not exist, create and save user record
+    const id = await auth.writeCred({ email, password });
+    return done(null, id);
+});
+
 //Setup options for Strategy
 const JwtOptions = {
     jwtFromRequest: ExtractJwt.fromHeader("authorization"),
@@ -48,5 +62,6 @@ const JwtLogin = new JwtStrategy(JwtOptions, async (payload, done) => {
 });
 
 //Use Strategy
-passport.use(LocalLogin);
+passport.use("local-signin", LocalSignIn);
+passport.use("local-signup", LocalSignUp);
 passport.use(JwtLogin);
