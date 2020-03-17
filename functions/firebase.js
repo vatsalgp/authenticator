@@ -6,27 +6,10 @@ const db = admin.firestore();
 const users = db.collection("auth");
 
 //Read Data
-exports.read = async (email) => {
+exports.getByEmail = async email => {
     let output = {};
-    await users.get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-            const data = doc.data();
-            if (data.email === email)
-                output = data;
-        });
-    });
-    return output;
-};
-
-exports.getId = async (email) => {
-    let output = "";
-    await users.get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-            const data = doc.data();
-            if (data.email === email)
-                output = doc.id;
-        });
-    });
+    const snapshot = await users.where("email", "==", email).get();
+    snapshot.forEach(doc => output = { ...doc.data(), id: doc.id });
     return output;
 };
 

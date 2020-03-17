@@ -20,7 +20,8 @@ const LocalLogin = new LocalStrategy({ usernameField: "email" }, async (email, p
             else if (!isMatch)
                 return done(null, false);
             else {
-                const id = await firebase.getId(email);
+                const user = await firebase.getByEmail(email);
+                const id = user.id;
                 return done(null, id);
             }
         });

@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt-nodejs");
 const firebase = require("./firebase");
 
 exports.readCred = async email => {
-    const user = await firebase.read(email);
+    const user = await firebase.getByEmail(email);
     //User exists
     if (user && user.email == email)
         return user.password;
