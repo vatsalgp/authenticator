@@ -1,8 +1,7 @@
-build
-node_modules
 functions/node_modules
-functions/config.js
-firebase.json
-.firebaserc
+functions/utils/secretKey.js
+
+node_modules
+build
 .firebase
 *log*
