@@ -13,7 +13,7 @@ const app = express();
 const whitelist = [
 	"https://authenticator-5a724.web.app",
 	"https://authenticator-5a724.firebaseapp.com",
-	"https://auth.vatsalgp.live"
+	"https://auth.vatsalgp.com"
 ]; // No ending Slash
 
 const corsOptions = {
